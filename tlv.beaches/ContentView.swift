@@ -27,6 +27,7 @@ struct ContentView: View {
         VStack {
             Text("TLV Beaches")
                 .font(.largeTitle)
+                .foregroundColor(.pink)
 
             Group {
                 switch pageNum {

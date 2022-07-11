@@ -17,15 +17,6 @@ struct SendOTPResponse: Codable {
     let errorId: Int
 }
 
-struct WelcomeText: View {
-    var body: some View {
-        return Text("Welcome")
-            .font(.title2)
-            .fontWeight(.semibold)
-            .padding(.top, 20)
-    }
-}
-
 struct DirectionsText: View {
     var body: some View {
         return Text("Sign in to your account with Citizen ID and Mobile Phone Number")
@@ -52,23 +43,50 @@ struct IdentityView: View {
 
             VStack {
                 
-                WelcomeText()
                 DirectionsText()
                 
-                HStack {
-                    TextField("Citizen Id", text: $userId)
-                        .background(lightGreyColor)
-                        .cornerRadius(5.0)
-                        .keyboardType(.numberPad)
-                }.padding()
-                HStack {
-                    TextField("Phone Number", text: $phoneNumber)
-                        .background(lightGreyColor)
-                        .cornerRadius(5.0)
-                        .keyboardType(.numberPad)
-                        
-                }.padding()
-                Button {
+                Label {
+                    ZStack(alignment: .leading) {
+                        if userId.isEmpty {
+                            Text("Citizen Id")
+                                .foregroundColor(.gray)
+                        }
+                        TextField("", text: $userId)
+                            .cornerRadius(5.0)
+                            .keyboardType(.numberPad)
+                    }.padding()
+                } icon: {
+                    Image(systemName: "person")
+                        .frame(width: 24, height: 24)
+                        .foregroundColor(.blue)
+                        .padding(.leading)
+                }
+                
+                Divider()
+                    .background(.gray)
+                
+                Label {
+                    ZStack(alignment: .leading) {
+                        if phoneNumber.isEmpty {
+                            Text("Phone Number")
+                                .foregroundColor(.gray)
+                        }
+                        TextField("", text: $phoneNumber)
+                            .cornerRadius(5.0)
+                            .keyboardType(.numberPad)
+                    }.padding()
+                } icon: {
+                        Image(systemName: "phone")
+                            .frame(width: 24, height: 24)
+                            .foregroundColor(.blue)
+                            .padding(.leading)
+                }
+                Divider()
+                    .background(.gray)
+                
+                Spacer()
+                
+                Button(action: {
                     Task {
                         
                         let url = URL(string:"https://tlvsso.azurewebsites.net/api/request_otp")!
@@ -92,11 +110,27 @@ struct IdentityView: View {
 
                     }
 
-                } label: {
-                    Text("Continue")
-                            .padding(2)
+                }) {
+                    ZStack {
+                        Circle()
+                            .foregroundColor(.pink)
+                            .frame(width: 60, height: 60)
+                        Image(systemName: "arrow.right")
+                            .font(.title)
+                            .foregroundColor(.white)
+                    }
+                    .padding(.top,35)
                 }
                 .disabled(self.isLoading)
+                
+//                Button {
+//
+//
+//                } label: {
+//                    Text("Continue")
+//                            .padding(2)
+//                }
+//                .disabled(self.isLoading)
                 
                 if showError {
                     VStack {
@@ -121,15 +155,11 @@ struct IdentityView: View {
     
 }
 
-//struct IdentityView_Previews: PreviewProvider {
-//
-//    @Binding var pageNumber: Int
-//    @Binding var phoneNumber: String = "0543307026"
-//    @Binding var userId: String = "31306948"
-//
-//    static var previews: some View {
-//
-//        IdentityView(pageNum: $pageNumber, phoneNumber: $phoneNumber, userId: $userId)
-//    }
-//}
+struct IdentityView_Previews: PreviewProvider {
+
+    static var previews: some View {
+
+        IdentityView(pageNum: .constant(0), phoneNumber: .constant("0543307026"), userId: .constant("31306948"))
+    }
+}
 
