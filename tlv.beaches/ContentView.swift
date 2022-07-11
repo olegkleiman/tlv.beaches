@@ -28,6 +28,7 @@ struct ContentView: View {
             Text("TLV Beaches")
                 .font(.largeTitle)
                 .foregroundColor(.pink)
+                .padding(.top, 50)
 
             Group {
                 switch pageNum {

@@ -22,9 +22,8 @@ struct DirectionsText: View {
         return Text("Sign in to your account with Citizen ID and Mobile Phone Number")
             .font(.title3)
             .fontWeight(.light)
-            .padding(.top, 20)
-            .padding(.leading, 20)
-            .padding(.trailing, 20)
+            .padding(EdgeInsets(top: 20, leading: 0,
+                                bottom: 60, trailing: 0))
     }
 }
 
