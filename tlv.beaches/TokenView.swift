@@ -48,51 +48,75 @@ struct TokenView: View {
                 .font(.title)
                 .foregroundColor(.pink)
             
-            HStack(alignment: .center) {
-                Text("Name:")
-                    .font(.system(size: 16, weight: .heavy))
-                TextField("Name", text: $name)
+            VStack {
+                Divider().background(.gray)
+                
+                HStack {
+                    Text("Name:")
+                        .font(.system(size: 16, weight: .heavy))
+                    Text(name)
+                    Spacer()
+                    
+                }
+                .padding()
+
+                Divider().background(.gray)
             }
-            .padding()
+
             
-            HStack(alignment: .center) {
-                Text("Email:")
-                    .font(.system(size: 16, weight: .heavy))
-                TextField("EMail", text: $email)
+            VStack {
+                HStack(alignment: .center) {
+                    Text("Email:")
+                        .font(.system(size: 16, weight: .heavy))
+                    Text(email)
+                    Spacer()
+                }
+                .padding()
+                
+                Divider().background(.gray)
             }
-            .padding()
 
 //            TextField("Expires at", text: stringFromDate($expiresAt))
 //                .padding(2)
-            HStack {
-                Text("Issuer:")
-                    .font(.system(size: 16, weight: .heavy))
-                TextField("Issuer", text: $issuer)
-                    .truncationMode(.tail)
-                    .onAppear {
-                        if let id_token = jsonTokens?.id_token {
-                            let jwt = try? decode(jwt: id_token)
-                            self.issuer = jwt?.issuer ?? "unknown"
-                            self.subject = jwt?.subject ?? "unknown"
-                            self.expiresAt = jwt?.expiresAt ?? nil
+            VStack {
+                HStack {
+                    Text("Issuer:")
+                        .font(.system(size: 16, weight: .heavy))
+                    Text(issuer)
+                        .truncationMode(.tail)
+                        .onAppear {
+                            if let id_token = jsonTokens?.id_token {
+                                let jwt = try? decode(jwt: id_token)
+                                self.issuer = jwt?.issuer ?? "unknown"
+                                self.subject = jwt?.subject ?? "unknown"
+                                self.expiresAt = jwt?.expiresAt ?? nil
 
-                            var claim = jwt?.claim(name: "name")
-                            self.name = claim?.string ?? "unknown"
+                                var claim = jwt?.claim(name: "name")
+                                self.name = claim?.string ?? "unknown"
 
-                            claim = jwt?.claim(name: "signInNamesInfo.emailAddress")
-                            self.email = claim?.string ?? "unknown"
+                                claim = jwt?.claim(name: "signInNamesInfo.emailAddress")
+                                self.email = claim?.string ?? "unknown"
+                            }
                         }
-                    }
+                    
+                }
+                .padding()
+                
+                Divider().background(.gray)
             }
-            .padding()
             
-            HStack {
-                Text("Subject:")
-                    .font(.system(size: 16, weight: .heavy))
-                TextField("Subject", text: $subject)
-                    .truncationMode(.tail)
+            VStack {
+                HStack {
+                    Text("Subject:")
+                        .font(.system(size: 16, weight: .heavy))
+                    Text(subject)
+                        .truncationMode(.tail)
+                    Spacer()
+                }
+                .padding()
+                
+                Divider().background(.gray)
             }
-            .padding()
             
             Button {
                 Task {
