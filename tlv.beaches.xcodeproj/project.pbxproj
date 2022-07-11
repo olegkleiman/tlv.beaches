@@ -11,6 +11,13 @@
 		DCECF3F6287B16EB00E6362C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCECF3F5287B16EB00E6362C /* ContentView.swift */; };
 		DCECF3F8287B16ED00E6362C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCECF3F7287B16ED00E6362C /* Assets.xcassets */; };
 		DCECF3FB287B16ED00E6362C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCECF3FA287B16ED00E6362C /* Preview Assets.xcassets */; };
+		DCECF402287B183400E6362C /* IdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCECF401287B183300E6362C /* IdentityView.swift */; };
+		DCECF405287B18E000E6362C /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCECF404287B18E000E6362C /* OTPView.swift */; };
+		DCECF407287B196000E6362C /* TokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCECF406287B196000E6362C /* TokenView.swift */; };
+		DCECF40A287B1C6400E6362C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DCECF409287B1C6400E6362C /* Alamofire */; };
+		DCECF40D287B1DC900E6362C /* OktaJWT in Frameworks */ = {isa = PBXBuildFile; productRef = DCECF40C287B1DC900E6362C /* OktaJWT */; };
+		DCECF410287B1E8800E6362C /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = DCECF40F287B1E8800E6362C /* JWTDecode */; };
+		DCECF436287B4FA100E6362C /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = DCECF435287B4FA100E6362C /* SwiftKeychainWrapper */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +26,10 @@
 		DCECF3F5287B16EB00E6362C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DCECF3F7287B16ED00E6362C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DCECF3FA287B16ED00E6362C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DCECF401287B183300E6362C /* IdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityView.swift; sourceTree = "<group>"; };
+		DCECF404287B18E000E6362C /* OTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
+		DCECF406287B196000E6362C /* TokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenView.swift; sourceTree = "<group>"; };
+		DCECF42C287B21EB00E6362C /* tlv-beaches-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "tlv-beaches-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +37,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCECF40A287B1C6400E6362C /* Alamofire in Frameworks */,
+				DCECF40D287B1DC900E6362C /* OktaJWT in Frameworks */,
+				DCECF436287B4FA100E6362C /* SwiftKeychainWrapper in Frameworks */,
+				DCECF410287B1E8800E6362C /* JWTDecode in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,8 +66,9 @@
 		DCECF3F2287B16EB00E6362C /* tlv.beaches */ = {
 			isa = PBXGroup;
 			children = (
+				DCECF42C287B21EB00E6362C /* tlv-beaches-Info.plist */,
+				DCECF403287B18C600E6362C /* Views */,
 				DCECF3F3287B16EB00E6362C /* tlv_beachesApp.swift */,
-				DCECF3F5287B16EB00E6362C /* ContentView.swift */,
 				DCECF3F7287B16ED00E6362C /* Assets.xcassets */,
 				DCECF3F9287B16ED00E6362C /* Preview Content */,
 			);
@@ -65,6 +81,17 @@
 				DCECF3FA287B16ED00E6362C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DCECF403287B18C600E6362C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DCECF401287B183300E6362C /* IdentityView.swift */,
+				DCECF3F5287B16EB00E6362C /* ContentView.swift */,
+				DCECF404287B18E000E6362C /* OTPView.swift */,
+				DCECF406287B196000E6362C /* TokenView.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +110,12 @@
 			dependencies = (
 			);
 			name = tlv.beaches;
+			packageProductDependencies = (
+				DCECF409287B1C6400E6362C /* Alamofire */,
+				DCECF40C287B1DC900E6362C /* OktaJWT */,
+				DCECF40F287B1E8800E6362C /* JWTDecode */,
+				DCECF435287B4FA100E6362C /* SwiftKeychainWrapper */,
+			);
 			productName = tlv.beaches;
 			productReference = DCECF3F0287B16EB00E6362C /* tlv.beaches.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +144,12 @@
 				Base,
 			);
 			mainGroup = DCECF3E7287B16EB00E6362C;
+			packageReferences = (
+				DCECF408287B1C6400E6362C /* XCRemoteSwiftPackageReference "Alamofire" */,
+				DCECF40B287B1DC900E6362C /* XCRemoteSwiftPackageReference "okta-ios-jwt" */,
+				DCECF40E287B1E8800E6362C /* XCRemoteSwiftPackageReference "JWTDecode.swift" */,
+				DCECF434287B4FA100E6362C /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
+			);
 			productRefGroup = DCECF3F1287B16EB00E6362C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,6 +177,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCECF3F6287B16EB00E6362C /* ContentView.swift in Sources */,
+				DCECF402287B183400E6362C /* IdentityView.swift in Sources */,
+				DCECF407287B196000E6362C /* TokenView.swift in Sources */,
+				DCECF405287B18E000E6362C /* OTPView.swift in Sources */,
 				DCECF3F4287B16EB00E6362C /* tlv_beachesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,6 +312,7 @@
 				DEVELOPMENT_TEAM = GX7N6F8DFJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "tlv-beaches-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -299,6 +342,7 @@
 				DEVELOPMENT_TEAM = GX7N6F8DFJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "tlv-beaches-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -339,6 +383,64 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DCECF408287B1C6400E6362C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		DCECF40B287B1DC900E6362C /* XCRemoteSwiftPackageReference "okta-ios-jwt" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/okta/okta-ios-jwt.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		DCECF40E287B1E8800E6362C /* XCRemoteSwiftPackageReference "JWTDecode.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/JWTDecode.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		DCECF434287B4FA100E6362C /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DCECF409287B1C6400E6362C /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCECF408287B1C6400E6362C /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		DCECF40C287B1DC900E6362C /* OktaJWT */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCECF40B287B1DC900E6362C /* XCRemoteSwiftPackageReference "okta-ios-jwt" */;
+			productName = OktaJWT;
+		};
+		DCECF40F287B1E8800E6362C /* JWTDecode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCECF40E287B1E8800E6362C /* XCRemoteSwiftPackageReference "JWTDecode.swift" */;
+			productName = JWTDecode;
+		};
+		DCECF435287B4FA100E6362C /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCECF434287B4FA100E6362C /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DCECF3E8287B16EB00E6362C /* Project object */;
 }
