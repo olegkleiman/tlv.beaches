@@ -36,57 +36,69 @@ struct OTPView: View {
                     .keyboardType(.numberPad)
 
             }
-            Button("Login") {
-                Task {
+            .padding()
+            
+            HStack {
+                Button("Login") {
+                    Task {
 
-                    let url = URL(string: "https://tlvsso.azurewebsites.net/api/login")!
-                    
-                    let parameters: [String: String] = [
-                        "phone_number": phoneNumber,
-                        "otp": otp,
-                        "client_id": clientId,
-                        "scope": "openid offline_access https://TlvfpB2CPPR.onmicrosoft.com/\(clientId)/TLV.Digitel.All"
-                    ]
+                        let url = URL(string: "https://tlvsso.azurewebsites.net/api/login")!
+                        
+                        let parameters: [String: String] = [
+                            "phone_number": phoneNumber,
+                            "otp": otp,
+                            "client_id": clientId,
+                            "scope": "openid offline_access https://TlvfpB2CPPR.onmicrosoft.com/\(clientId)/TLV.Digitel.All"
+                        ]
 
-                    self.isLoading = true
-                    AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default)
-                        .validate(statusCode: 200..<300)
-                        .responseDecodable(of: DecodableTokens.self) { response in
-                            
-                            switch response.result {
+                        self.isLoading = true
+                        AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default)
+                            .validate(statusCode: 200..<300)
+                            .responseDecodable(of: DecodableTokens.self) { response in
                                 
-                                case .success(let jsonTokens):
-                                    self.jsonTokens = jsonTokens
-                                
-                                    do {
-                                        let jsonEncoder = JSONEncoder()
-                                        let jsonData = try jsonEncoder.encode(jsonTokens)
-                                        let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)
+                                switch response.result {
                                     
-                                        KeychainWrapper.standard.set(jsonString!, forKey: "tlv_tokens")
-                                        self.pageNum = 2
-                                    } catch  let error {
+                                    case .success(let jsonTokens):
+                                        self.jsonTokens = jsonTokens
+                                    
+                                        do {
+                                            let jsonEncoder = JSONEncoder()
+                                            let jsonData = try jsonEncoder.encode(jsonTokens)
+                                            let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)
+                                        
+                                            KeychainWrapper.standard.set(jsonString!, forKey: "tlv_tokens")
+                                            self.pageNum = 2
+                                        } catch  let error {
+                                            print("🥶 \(error)")
+                                        }
+                                    case .failure(let error):
                                         print("🥶 \(error)")
-                                    }
-                                case .failure(let error):
-                                    print("🥶 \(error)")
-                            }
-                            
-//                            if response.response?.statusCode == 200 {
-//                                self.jsonTokens = response.value!
-//                                self.stage = 2
-//                            } else {
-//                                let error = response.result
-//                                print(error)
-//                            }
-                            
-                            self.isLoading = false
-                    }
+                                }
+                                
+    //                            if response.response?.statusCode == 200 {
+    //                                self.jsonTokens = response.value!
+    //                                self.stage = 2
+    //                            } else {
+    //                                let error = response.result
+    //                                print(error)
+    //                            }
+                                
+                                self.isLoading = false
+                        }
 
+                    }
                 }
+                .disabled(self.isLoading)
+                .padding()
+                
+                Button("Send again") {
+                    self.pageNum = 0
+                }
+                .disabled(self.isLoading)
+                .padding()
+                
             }
-            .disabled(self.isLoading)
-            .padding(2)
+            .padding(20)
             
             if showError {
                 VStack {
@@ -110,5 +122,15 @@ struct OTPView: View {
             Spacer()
 
         }
+    }
+}
+
+struct OTPView_Previews: PreviewProvider {
+
+    static var previews: some View {
+
+        OTPView(pageNum: .constant(0), phoneNumber: .constant("0543307026"),
+                userId: .constant("31306948"),
+                jsonTokens: .constant(sampleTokens))
     }
 }

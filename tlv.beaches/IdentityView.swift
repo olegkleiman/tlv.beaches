@@ -85,51 +85,53 @@ struct IdentityView: View {
                 
                 Spacer()
                 
-                Button(action: {
-                    Task {
-                        
-                        let url = URL(string:"https://tlvsso.azurewebsites.net/api/request_otp")!
-                        
-                        let parameters: [String: String] = [
-                            "userId": userId,
-                            "phoneNumber": phoneNumber
-                        ]
-                        
-                        self.isLoading = true
-                        AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default)
-                            .responseDecodable(of: SendOTPResponse.self) { response in
-                                if !response.value!.isError as Bool {
-                                    self.pageNum = 1
-                                } else
-                                {
-                                    self.errorMessage = (response.value?.errorDesc as? String)!
-                                    self.showError = true
-                                }
+                ZStack(alignment: .leading) {
+                    
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .padding()
+                        .opacity(isLoading ? 1 : 0)
+                    
+                    Button(action: {
+                        Task {
+                            
+                            self.isLoading = true
+                            
+                            let url = URL(string:"https://tlvsso.azurewebsites.net/api/request_otp")!
+                            
+                            let parameters: [String: String] = [
+                                "userId": userId,
+                                "phoneNumber": phoneNumber
+                            ]
+                            
+                            AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default)
+                                .responseDecodable(of: SendOTPResponse.self) { response in
+                                    if !response.value!.isError as Bool {
+                                        self.pageNum = 1
+                                    } else
+                                    {
+                                        self.errorMessage = (response.value?.errorDesc as? String)!
+                                        self.showError = true
+                                    }
+                                    
+                                    self.isLoading.toggle()
+                            }
+                            
                         }
-
+                    }) {
+                        ZStack(alignment: .center) {
+                            Circle()
+                                .foregroundColor(.pink)
+                                .frame(width: 60, height: 60)
+                            Image(systemName: "arrow.right")
+                                .font(.title)
+                                .foregroundColor(.white)
+                        }
+                        .padding(.top,35)
                     }
-
-                }) {
-                    ZStack {
-                        Circle()
-                            .foregroundColor(.pink)
-                            .frame(width: 60, height: 60)
-                        Image(systemName: "arrow.right")
-                            .font(.title)
-                            .foregroundColor(.white)
-                    }
-                    .padding(.top,35)
+//                    .disabled(self.isLoading)
+                    .opacity(!isLoading ? 1 : 0)
                 }
-                .disabled(self.isLoading)
-                
-//                Button {
-//
-//
-//                } label: {
-//                    Text("Continue")
-//                            .padding(2)
-//                }
-//                .disabled(self.isLoading)
                 
                 if showError {
                     VStack {
@@ -140,10 +142,10 @@ struct IdentityView: View {
                 }
             }
             
-            if isLoading {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
-            }
+//            if isLoading {
+//                ProgressView()
+//                    .progressViewStyle(CircularProgressViewStyle())
+//            }
             
             Spacer()
             

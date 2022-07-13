@@ -8,6 +8,21 @@
 import SwiftUI
 import SwiftKeychainWrapper
 
+struct DecodableRefreshTokens: Codable {
+    let access_token: String?
+    let token_type: String
+    let not_before: Int?
+    let id_token_expires_in: Int?
+    let profile_info: String?
+    let scope: String?
+    let expires_in: Int // Here Azure return int in contrast with string within token response
+    let expires_on: Int?
+    let resource: String?
+    let refresh_token: String
+    let refresh_token_expires_in: Int?
+    let id_token: String
+}
+
 struct DecodableTokens: Codable {
     let access_token: String
     let token_type: String
