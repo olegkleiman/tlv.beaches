@@ -109,7 +109,14 @@ struct ContentView: View {
                     .responseDecodable(of: StrictDecodableTokens.self) { response in
   
                         switch response.result {
-                        case .success(let jsonTokens): do {
+                            case .success(let jsonTokens): do {
+                                
+                                self.jsonTokens = DecodableTokens(access_token: jsonTokens.access_token,
+                                                                  token_type: jsonTokens.token_type,
+                                                                  expires_in: jsonTokens.expires_in,
+                                                                  refresh_token: jsonTokens.refresh_token,
+                                                                  id_token: jsonTokens.id_token,
+                                                                  sso_token: ssoToken)
                                 
                                 let jsonEncoder = JSONEncoder()
                                 let jsonData = try jsonEncoder.encode(jsonTokens)
@@ -124,7 +131,7 @@ struct ContentView: View {
                             
                             case .failure(let error):
                                 print("🥶 \(error)")
-                            }
+                        }
                         
                 }
 
