@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC84569F287EE9A40093E4AB /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC84569E287EE9A10093E4AB /* SelectionView.swift */; };
+		DC8456A1287EEB300093E4AB /* GuestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8456A0287EEB300093E4AB /* GuestView.swift */; };
 		DCECF3F4287B16EB00E6362C /* tlv_beachesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCECF3F3287B16EB00E6362C /* tlv_beachesApp.swift */; };
 		DCECF3F6287B16EB00E6362C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCECF3F5287B16EB00E6362C /* ContentView.swift */; };
 		DCECF3F8287B16ED00E6362C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCECF3F7287B16ED00E6362C /* Assets.xcassets */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DC84569E287EE9A10093E4AB /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
+		DC8456A0287EEB300093E4AB /* GuestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestView.swift; sourceTree = "<group>"; };
 		DCECF3F0287B16EB00E6362C /* tlv.beaches.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tlv.beaches.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCECF3F3287B16EB00E6362C /* tlv_beachesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tlv_beachesApp.swift; sourceTree = "<group>"; };
 		DCECF3F5287B16EB00E6362C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -87,9 +91,11 @@
 			isa = PBXGroup;
 			children = (
 				DCECF401287B183300E6362C /* IdentityView.swift */,
+				DC8456A0287EEB300093E4AB /* GuestView.swift */,
 				DCECF3F5287B16EB00E6362C /* ContentView.swift */,
 				DCECF404287B18E000E6362C /* OTPView.swift */,
 				DCECF406287B196000E6362C /* TokenView.swift */,
+				DC84569E287EE9A10093E4AB /* SelectionView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -178,9 +184,11 @@
 			files = (
 				DCECF3F6287B16EB00E6362C /* ContentView.swift in Sources */,
 				DCECF402287B183400E6362C /* IdentityView.swift in Sources */,
+				DC8456A1287EEB300093E4AB /* GuestView.swift in Sources */,
 				DCECF407287B196000E6362C /* TokenView.swift in Sources */,
 				DCECF405287B18E000E6362C /* OTPView.swift in Sources */,
 				DCECF3F4287B16EB00E6362C /* tlv_beachesApp.swift in Sources */,
+				DC84569F287EE9A40093E4AB /* SelectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +321,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "tlv-beaches-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "TLV Sea Beaches";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -343,6 +352,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "tlv-beaches-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "TLV Sea Beaches";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

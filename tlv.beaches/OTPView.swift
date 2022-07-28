@@ -16,12 +16,12 @@ struct OTPView: View {
     @Binding var phoneNumber: String
     @Binding var userId: String
     @Binding var jsonTokens: DecodableTokens?
+    @Binding var clientId: String
     
     @State private var otp: String = ""
     @State private var errorMessage: String = ""
     @State private var showError = false
     
-    @State private var clientId: String = "8739c7f1-e812-4461-b9c8-d670307dd22b"
     @State private var isLoading = false
     
     var body: some View {
@@ -34,21 +34,22 @@ struct OTPView: View {
                     .font(.body)
                 TextField("Code you've received", text: $otp)
                     .keyboardType(.numberPad)
-
             }
             .padding()
             
             HStack {
-                Button("Login") {
+                Button(action: {
                     Task {
 
                         let url = URL(string: "https://tlvsso.azurewebsites.net/api/login")!
                         
+                        let deviceId = UIDevice.current.identifierForVendor!.uuidString
                         let parameters: [String: String] = [
-                            "phone_number": phoneNumber,
+                            "phoneNumber": phoneNumber,
                             "otp": otp,
-                            "client_id": clientId,
-                            "scope": "openid offline_access https://TlvfpB2CPPR.onmicrosoft.com/\(clientId)/TLV.Digitel.All"
+                            "clientId": clientId,
+                            "scope": "openid offline_access https://TlvfpB2CPPR.onmicrosoft.com/\(clientId)/TLV.Digitel.All",
+                            "deviceId": deviceId
                         ]
 
                         self.isLoading = true
@@ -67,7 +68,8 @@ struct OTPView: View {
                                             let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)
                                         
                                             KeychainWrapper.standard.set(jsonString!, forKey: "tlv_tokens")
-                                            self.pageNum = 2
+                                            KeychainWrapper.standard.set(jsonTokens.sso_token!, forKey: "sso_token")
+                                            self.pageNum = 3
                                         } catch  let error {
                                             print("🥶 \(error)")
                                         }
@@ -87,12 +89,23 @@ struct OTPView: View {
                         }
 
                     }
+                }) {
+                    ZStack(alignment: .center) {
+                        Circle()
+                            .foregroundColor(.pink)
+                            .frame(width: 60, height: 60)
+                        Image(systemName: "arrow.right")
+                            .font(.title)
+                            .foregroundColor(.white)
+                    }
                 }
                 .disabled(self.isLoading)
                 .padding()
                 
+                Spacer()
+                
                 Button("Send again") {
-                    self.pageNum = 0
+                    self.pageNum = 1
                 }
                 .disabled(self.isLoading)
                 .padding()
@@ -131,6 +144,8 @@ struct OTPView_Previews: PreviewProvider {
 
         OTPView(pageNum: .constant(0), phoneNumber: .constant("0543307026"),
                 userId: .constant("31306948"),
-                jsonTokens: .constant(sampleTokens))
+                jsonTokens: .constant(sampleTokens),
+                clientId: .constant("8739c7f1-e812-4461-b9c8-d670307dd22b")
+        )
     }
 }
