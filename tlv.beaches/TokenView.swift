@@ -12,8 +12,7 @@ import Alamofire
 import OktaJWT
 import SwiftKeychainWrapper
 
-let ISSUER: String =
-"https://tlvfpb2cppr.b2clogin.com/781ec24d-9aa5-4628-9fc1-5a1f13dc0424/v2.0/"
+let ISSUER: String = "https://tlvfpb2cppr.b2clogin.com/TlvfpB2CPPR.onmicrosoft.com/b2c_1a_ropc_kiev/v2.0"
 
 struct ErrorState: Decodable
 {
@@ -73,21 +72,19 @@ struct TokenView: View {
                                BindingWrapper(label: "Subject", value: self.subject),
                                BindingWrapper(label: "Expires at", value: _exp!)]
             
-            HStack {
-                VStack {
-                    ForEach(inputFields, id: \.id)  { item in
-                        HStack {
-                            Text(item.label)
-                                .font(.system(size: 16, weight: .heavy))
-                            Text(item.value)
-                                .truncationMode(.tail)
-                            Spacer()
-                        }
-                        .padding()
-                        
-                        Divider()
-                            .background(.gray)
+            VStack {
+                ForEach(inputFields, id: \.id)  { item in
+                    HStack {
+                        Text(item.label)
+                            .font(.system(size: 16, weight: .heavy))
+                        Text(item.value)
+                            .truncationMode(.tail)
+                        Spacer()
                     }
+                    .padding()
+                    
+                    Divider()
+                        .background(.gray)
                 }
             }
             .onAppear {
@@ -121,9 +118,10 @@ struct TokenView: View {
                             try await Task.sleep(nanoseconds: UInt64(seconds * Double(NSEC_PER_SEC)))
                             
                             let options = [
-                              //"issuer": ISSUER,
+                              "issuer": ISSUER,
                               "exp": true,
                               "iat": true,
+                              "leeway": 3000 // allow ~5 min for clock drift (exp and iat)
                               //"scp": "TLV.Digitel.All"
                             ] as [String: Any]
 
