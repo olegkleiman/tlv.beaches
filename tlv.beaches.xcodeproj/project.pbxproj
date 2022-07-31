@@ -25,6 +25,7 @@
 /* Begin PBXFileReference section */
 		DC84569E287EE9A10093E4AB /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
 		DC8456A0287EEB300093E4AB /* GuestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestView.swift; sourceTree = "<group>"; };
+		DCCB4C322896E66B001CC6F0 /* tlv.beaches.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tlv.beaches.entitlements; sourceTree = "<group>"; };
 		DCECF3F0287B16EB00E6362C /* tlv.beaches.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tlv.beaches.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCECF3F3287B16EB00E6362C /* tlv_beachesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tlv_beachesApp.swift; sourceTree = "<group>"; };
 		DCECF3F5287B16EB00E6362C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,6 +71,7 @@
 		DCECF3F2287B16EB00E6362C /* tlv.beaches */ = {
 			isa = PBXGroup;
 			children = (
+				DCCB4C322896E66B001CC6F0 /* tlv.beaches.entitlements */,
 				DCECF42C287B21EB00E6362C /* tlv-beaches-Info.plist */,
 				DCECF403287B18C600E6362C /* Views */,
 				DCECF3F3287B16EB00E6362C /* tlv_beachesApp.swift */,
@@ -155,6 +157,7 @@
 				DCECF40B287B1DC900E6362C /* XCRemoteSwiftPackageReference "okta-ios-jwt" */,
 				DCECF40E287B1E8800E6362C /* XCRemoteSwiftPackageReference "JWTDecode.swift" */,
 				DCECF434287B4FA100E6362C /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
+				DCCB4C342896F2CD001CC6F0 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = DCECF3F1287B16EB00E6362C /* Products */;
 			projectDirPath = "";
@@ -314,6 +317,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = tlv.beaches/tlv.beaches.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"tlv.beaches/Preview Content\"";
@@ -332,8 +337,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "---.tlv-beaches";
+				PRODUCT_BUNDLE_IDENTIFIER = "gov.tlv.sea-beaches";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -345,6 +351,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = tlv.beaches/tlv.beaches.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"tlv.beaches/Preview Content\"";
@@ -363,8 +371,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "---.tlv-beaches";
+				PRODUCT_BUNDLE_IDENTIFIER = "gov.tlv.sea-beaches";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -395,6 +404,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DCCB4C342896F2CD001CC6F0 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 		DCECF408287B1C6400E6362C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";

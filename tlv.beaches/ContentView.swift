@@ -81,6 +81,65 @@ struct ContentView: View {
             }
             .onAppear {
 
+                
+                let keychainAccessGroupName = "GX7N6F8DFJ.gov.tlv.ssoKeychainGroup"
+                let itemKey = "My Key"
+                let itemValue = "My secretive bee 🐝"
+                
+                guard let valueData = itemValue.data(using: String.Encoding.utf8) else {
+                  print("Error saving text to Keychain")
+                  return
+                }
+                
+                // Add item to a shared Keychain
+                let queryAdd: [String: AnyObject] = [
+                  kSecClass as String: kSecClassGenericPassword,
+                  kSecAttrAccount as String: itemKey as AnyObject,
+                  kSecValueData as String: valueData as AnyObject,
+                  kSecAttrAccessible as String: kSecAttrAccessibleWhenUnlocked,
+                  kSecAttrAccessGroup as String: keychainAccessGroupName as AnyObject
+                ]
+                let resultCode = SecItemAdd(queryAdd as CFDictionary, nil)
+                
+                // Find a shared Keychain item
+                let queryLoad: [String: AnyObject] = [
+                  kSecClass as String: kSecClassGenericPassword,
+                  kSecAttrAccount as String: itemKey as AnyObject,
+                  kSecReturnData as String: kCFBooleanTrue,
+                  kSecMatchLimit as String: kSecMatchLimitOne,
+                  kSecAttrAccessGroup as String: keychainAccessGroupName as AnyObject
+                ]
+                
+                var result: AnyObject?
+
+                let resultCodeLoad = withUnsafeMutablePointer(to: &result) {
+                  SecItemCopyMatching(queryLoad as CFDictionary, UnsafeMutablePointer($0))
+                }
+
+                if resultCodeLoad == noErr {
+                  if let result = result as? Data,
+                    let keyValue = NSString(data: result,
+                                            encoding: String.Encoding.utf8.rawValue) as? String {
+
+                    // Found successfully
+                    print(keyValue)
+                  }
+                } else {
+                  print("Error loading from Keychain: \(resultCodeLoad)")
+                }
+                
+                // Delete a shared Keychain item
+//                let queryDelete: [String: AnyObject] = [
+//                  kSecClass as String: kSecClassGenericPassword,
+//                  kSecAttrAccount as String: itemKey as AnyObject,
+//                  kSecAttrAccessGroup as String: keychainAccessGroupName as AnyObject
+//                ]
+//                let resultCodeDelete = SecItemDelete(queryDelete as CFDictionary)
+//                if resultCodeDelete != noErr {
+//                  print("Error deleting from Keychain: \(resultCodeDelete)")
+//                }
+                
+                /// Old code
                 guard let jsonTokensString = KeychainWrapper.standard.string(forKey: "tlv_tokens")
                 else {
                     
